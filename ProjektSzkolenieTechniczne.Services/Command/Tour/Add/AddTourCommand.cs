@@ -16,6 +16,10 @@ namespace ProjektSzkolenieTechniczne.Service.Command.Tour.Add
 
         public bool IsActive { get; }
 
+        public AddTourCommand()
+        {
+        }
+
         public AddTourCommand(string destination, bool isActive, int year, int tourTime, DateTime date, int flightTime)
         {
             Destination = destination;

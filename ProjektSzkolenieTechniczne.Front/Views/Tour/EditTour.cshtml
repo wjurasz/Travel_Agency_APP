@@ -1,0 +1,34 @@
+﻿@model ProjektSzkolenieTechniczne.Service.Command.Tour.Edit.EditTourCommand
+
+@{
+    ViewData["Title"] = "Edit Tour";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="EditTour" method="post">
+    <div class="form-group">
+        <label asp-for="Destination" class="control-label"></label>
+        <input asp-for="Destination" class="form-control" />
+        <span asp-validation-for="Destination" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Year" class="control-label"></label>
+        <input asp-for="Year" class="form-control" />
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FlightTime" class="control-label"></label>
+        <input asp-for="FlightTime" class="form-control" />
+        <span asp-validation-for="FlightTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save Changes" class="btn btn-primary" />
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

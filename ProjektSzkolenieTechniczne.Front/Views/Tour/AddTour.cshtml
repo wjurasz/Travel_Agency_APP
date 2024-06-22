@@ -1,0 +1,39 @@
+﻿@model ProjektSzkolenieTechniczne.Service.Command.Tour.Add.AddTourCommand
+
+@{
+    ViewData["Title"] = "Add Tour";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="AddTour" method="post">
+    <div class="form-group">
+        <label asp-for="Destination" class="control-label"></label>
+        <input asp-for="Destination" class="form-control" />
+        <span asp-validation-for="Destination" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Year" class="control-label"></label>
+        <input asp-for="Year" class="form-control" />
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TourTime" class="control-label"></label>
+        <input asp-for="TourTime" class="form-control" />
+        <span asp-validation-for="TourTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Date" class="control-label"></label>
+        <input asp-for="Date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+    
+    <div></div>
+    <div class="form-group">
+        <input type="submit" value="Add Tour" class="btn btn-primary" />
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

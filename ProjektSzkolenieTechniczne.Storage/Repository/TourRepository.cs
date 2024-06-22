@@ -8,40 +8,40 @@ namespace SzkolenieTechniczneStorage.Repository
 {
     public class TourRepository : ITourRepository
     {
-        private readonly TravelAgencyTicketDbContext _context;
+        private readonly TravelAgencyTicketDbContext _repository;
 
-        public TourRepository(TravelAgencyTicketDbContext context)
+        public TourRepository(TravelAgencyTicketDbContext repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public void AddTour(Entities.Tour tour)
         {
-            _context.Tours.Add(tour);
-            _context.SaveChanges();
+            _repository.Tours.Add(tour);
+            _repository.SaveChanges();
         }
 
         public void AddFlight(Flight flight)
         {
-            _context.Flights.Add(flight);
-            _context.SaveChanges();
+            _repository.Flights.Add(flight);
+            _repository.SaveChanges();
         }
 
         public void BuyTicket(Ticket ticket)
         {
-            _context.Tickets.Add(ticket);
-            _context.SaveChanges();
+            _repository.Tickets.Add(ticket);
+            _repository.SaveChanges();
         }
 
         public void EditTour(Entities.Tour tour)
         {
-            _context.Tours.Update(tour);
-            _context.SaveChanges();
+            _repository.Tours.Update(tour);
+            _repository.SaveChanges();
         }
 
         public Entities.Tour GetTourById(long tourId)
         {
-            return _context.Tours
+            return _repository.Tours
                   .Include(c => c.Flights)
                   .ThenInclude(c => c.Tickets)
                   .SingleOrDefault(x => x.Id == tourId);
@@ -49,32 +49,32 @@ namespace SzkolenieTechniczneStorage.Repository
 
         public List<Entities.Tour> GetTours()
         {
-            return _context.Tours.ToList();
+            return _repository.Tours.ToList();
         }
 
         public Entities.Tour GetFlightDetails(long tourId)
         {
-            return _context.Tours.Where(x => x.Id == tourId)
+            return _repository.Tours.Where(x => x.Id == tourId)
               .Include(t => t.Flights)
               .SingleOrDefault();
         }
 
         public List<Flight> GetFlightByTourId(long tourId)
         {
-            return _context.Flights.Where(x => x.TourId == tourId)
+            return _repository.Flights.Where(x => x.TourId == tourId)
                .ToList();
         }
 
         public Flight GetFlightById(long flightId)
         {
-            return _context.Flights
+            return _repository.Flights
                 .Include(f => f.Tickets)
                 .SingleOrDefault(x => x.Id == flightId);
         }
 
         public List<Flight> GetFlightByDate(DateTime date)
         {
-            return _context.Flights
+            return _repository.Flights
                 .Where(x => x.Date.Date == date.Date)
                 .Include(f => f.Tickets)
                 .ToList();
@@ -82,26 +82,26 @@ namespace SzkolenieTechniczneStorage.Repository
 
         public bool IsTourExist(long tourId)
         {
-            return _context.Tours.Any(
+            return _repository.Tours.Any(
                  x => x.Id == tourId);
         }
 
         public bool IsTourExist(string destination, int year)
         {
-            return _context.Tours.Any(
+            return _repository.Tours.Any(
                   x => x.Destination == destination && x.Year == year);
         }
 
         public bool IsFlightExist(DateTime date)
         {
-            return _context.Flights.Any(x => x.Date == date);
+            return _repository.Flights.Any(x => x.Date == date);
         }
 
         public void RemoveTour(long id)
         {
-            var tour = _context.Tours.FirstOrDefault(x => x.Id == id);
-            _context.Remove(tour);
-            _context.SaveChanges();
+            var tour = _repository.Tours.FirstOrDefault(x => x.Id == id);
+            _repository.Remove(tour);
+            _repository.SaveChanges();
         }
     }
 }

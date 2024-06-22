@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjektSzkolenieTechniczne.Storage", "ProjektSzkolenieTechniczne.Storage\ProjektSzkolenieTechniczne.Storage.csproj", "{AC8401CA-C3A5-49A4-B875-30FC03324501}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Travel Agency", "ProjektSzkolenieTechniczne.Front\Travel Agency.csproj", "{4022B9DF-B318-4EF5-8444-7F1009D3835A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjektSzkolenieTechniczne.Front", "ProjektSzkolenieTechniczne.Front\ProjektSzkolenieTechniczne.Front.csproj", "{4022B9DF-B318-4EF5-8444-7F1009D3835A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjektSzkolenieTechniczne.Services", "ProjektSzkolenieTechniczne.Services\ProjektSzkolenieTechniczne.Services.csproj", "{F71C3D70-D4B9-4ED4-8599-277887AFD7BA}"
 EndProject
