@@ -6,6 +6,14 @@
         public string Destination { get; set; }
         public int Year { get; set; }
 
+        // Parameterless constructor
+        public DeleteTourCommand() { }
+
+        public DeleteTourCommand(long id)
+        {
+            Id = id;
+        }
+
         public DeleteTourCommand(long id, string destination, int year)
         {
             Id = id;

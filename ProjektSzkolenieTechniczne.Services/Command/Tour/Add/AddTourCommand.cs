@@ -1,26 +1,35 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjektSzkolenieTechniczne.Service.Command.Tour.Add
 {
     public class AddTourCommand : ICommand
     {
-        public string Destination { get; }
+        [Required(ErrorMessage = "The Destination field is required.")]
+        public string Destination { get; set; }
 
-        public int Year { get; }
+        [Required(ErrorMessage = "The Year field is required.")]
+        public int Year { get; set; }
 
-        public int TourTime { get; }
+        [Required(ErrorMessage = "The TourTime field is required.")]
+        public int TourTime { get; set; }
 
-        public DateTime Date { get; }
+        [Required(ErrorMessage = "The Date field is required.")]
+        public DateTime Date { get; set; }
 
-        public int FlightTime { get; }
+        [Required(ErrorMessage = "The NumberOfTickets field is required.")]
+        public int NumberOfTickets { get; set; }
 
-        public bool IsActive { get; }
+        [Required(ErrorMessage = "The IsActive field is required.")]
+        public bool IsActive { get; set; }
 
-        public AddTourCommand()
-        {
-        }
+        [Required(ErrorMessage = "The FlightTime field is required.")]
+        public int FlightTime { get; set; }
 
-        public AddTourCommand(string destination, bool isActive, int year, int tourTime, DateTime date, int flightTime)
+       
+        public AddTourCommand() { }
+
+        public AddTourCommand(string destination, bool isActive, int year, int tourTime, DateTime date, int flightTime, int numberOfTickets)
         {
             Destination = destination;
             Year = year;
@@ -28,6 +37,7 @@ namespace ProjektSzkolenieTechniczne.Service.Command.Tour.Add
             Date = date;
             IsActive = isActive;
             FlightTime = flightTime;
+            NumberOfTickets = numberOfTickets;
         }
     }
 }

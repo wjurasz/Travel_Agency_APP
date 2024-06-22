@@ -7,12 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Register the TourRepository
-builder.Services.AddScoped<ITourRepository, TourRepository>();
-
-// Add DbContext
+// Register the DbContext with the correct connection string
 builder.Services.AddDbContext<TravelAgencyTicketDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Register the repositories
+builder.Services.AddScoped<ITourRepository, TourRepository>();
+
 
 var app = builder.Build();
 
@@ -29,7 +30,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Tour}/{action=Index}/{id?}");
-
-app.MapControllers(); // Add this line if you are using attribute routing
 
 app.Run();

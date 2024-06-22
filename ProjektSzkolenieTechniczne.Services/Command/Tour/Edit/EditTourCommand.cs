@@ -10,6 +10,6 @@
 
         public int FlightTime { get; set; }
 
-       
+
     }
 }

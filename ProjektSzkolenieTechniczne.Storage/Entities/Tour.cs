@@ -9,20 +9,10 @@ namespace SzkolenieTechniczneStorage.Entities
     [Table("Tour", Schema = "TravelAgency")]
     public class Tour : BaseEntity
     {
-        public Tour()
-        {
-        }
-
-        public Tour(string destination, int tourTime, DateTime date, int year)
-        {
-            Destination = destination;
-            TourTime = tourTime;
-            Date = date;
-            Year = year;
-        }
+        
 
         [Required]
-        [MinLength(1)]
+        [MaxLength(100)]
         public string Destination { get; set; }
 
         [Required]
@@ -33,14 +23,25 @@ namespace SzkolenieTechniczneStorage.Entities
 
         [Required]
         public DateTime ActiveFrom { get; set; }
+
         public DateTime? ActiveTo { get; set; }
 
-        [Required]
         public int NumberOfTickets { get; set; }
 
         [Required]
         public int Year { get; set; }
 
         public ICollection<Flight> Flights { get; set; }
+
+        public Tour() { }
+
+        public Tour(string destination, int tourTime, DateTime date, int year)
+        {
+            Destination = destination;
+            TourTime = tourTime;
+            Date = date;
+            Year = year;
+            ActiveFrom = DateTime.Now;
+        }
     }
 }

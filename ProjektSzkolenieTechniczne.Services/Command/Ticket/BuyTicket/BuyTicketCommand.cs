@@ -1,26 +1,27 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjektSzkolenieTechniczne.Service.Command.Ticket.BuyTicket
 {
     public class BuyTicketCommand : ICommand
     {
-        public long TourId { get; }
+        public long TourId { get; set; }
+        public long FlightId { get; set; }
 
-        public int NumbersOfTickets { get; }
+        [Required]
+        [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
+        public string Email { get; set; }
 
-        public DateTime TourDate { get; }
+        [Required]
+        [Phone(ErrorMessage = "Please enter a valid phone number.")]
+        public string Phone { get; set; }
 
-        public string Email { get; }
+        [Required]
+        [Range(1, 10, ErrorMessage = "You can buy between 1 and 10 tickets.")]
+        public int NumbersOfTickets { get; set; }
 
-
-
-        public BuyTicketCommand(long tourId, int numbersOfTickets, DateTime tourDate, string email)
+        public BuyTicketCommand()
         {
-            TourId = tourId;
-            NumbersOfTickets = numbersOfTickets;
-            TourDate = tourDate;
-            Email = email;
-
         }
     }
 }

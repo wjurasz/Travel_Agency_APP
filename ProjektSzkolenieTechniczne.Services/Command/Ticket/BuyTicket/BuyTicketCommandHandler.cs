@@ -25,13 +25,7 @@ namespace ProjektSzkolenieTechniczne.Service.Command.Ticket.BuyTicket
                 return Result.Fail("Tour does not exist");
             }
 
-            var flight = _repository.GetFlightByDate(command.TourDate);
-            if (flight == null)
-            {
-                return Result.Fail("Flight is not valid");
-            }
-
-            var ticket = new SzkolenieTechniczneStorage.Entities.Ticket(command.Email, command.NumbersOfTickets);
+            
 
 
 

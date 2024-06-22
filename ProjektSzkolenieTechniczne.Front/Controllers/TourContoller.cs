@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjektSzkolenieTechniczne.Service.Command.Tour.Add;
+using ProjektSzkolenieTechniczne.Service.Command.Tour.Delete;
 using ProjektSzkolenieTechniczne.Service.Command.Tour.Edit;
 using SzkolenieTechniczneService.Query.Dtos;
 using SzkolenieTechniczneStorage.Entities;
@@ -27,7 +28,7 @@ namespace Travel_Agency.Controllers
         [HttpGet]
         public IActionResult AddTour()
         {
-            return View();
+            return View(new AddTourCommand());
         }
 
         [HttpPost]
@@ -42,16 +43,24 @@ namespace Travel_Agency.Controllers
                     TourTime = command.TourTime,
                     Date = command.Date,
                     ActiveFrom = DateTime.Now,
-                    ActiveTo = command.IsActive ? (DateTime?)null : DateTime.Now.AddYears(1)
+                    ActiveTo = command.IsActive ? (DateTime?)null : DateTime.Now.AddYears(1),
+                    NumberOfTickets = command.NumberOfTickets
                 };
 
-                _repository.AddTour(tour);
+                var flight = new Flight
+                {
+                    Date = command.Date,
+                    NumberOfTickets = command.NumberOfTickets,
+                    FlightTime = command.FlightTime,
+                    TourId = tour.Id // This will be set after the tour is saved
+                };
+
+                _repository.AddTourWithFlight(tour, flight);
                 return RedirectToAction("Index");
             }
 
             return View(command);
         }
-
         [HttpGet]
         public IActionResult EditTour(long id)
         {
@@ -103,20 +112,28 @@ namespace Travel_Agency.Controllers
                 return NotFound();
             }
 
-            return View(tour);
+            var command = new DeleteTourCommand
+            {
+                Id = tour.Id,
+                Destination = tour.Destination,
+                Year = tour.Year
+            };
+
+            return View(command);
         }
 
-        [HttpPost, ActionName("DeleteTour")]
-        public IActionResult DeleteTourConfirmed(long id)
+        [HttpPost]
+        public IActionResult DeleteTour(DeleteTourCommand command)
         {
-            var tour = _repository.GetTourById(id);
-            if (tour == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                _repository.RemoveTour(command.Id);
+                return RedirectToAction("Index");
             }
 
-            _repository.RemoveTour(id);
-            return RedirectToAction("Index");
+            return View(command);
         }
     }
 }
+
+
