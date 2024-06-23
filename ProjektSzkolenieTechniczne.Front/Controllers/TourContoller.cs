@@ -16,11 +16,13 @@ namespace Travel_Agency.Controllers
         {
             _repository = repository;
         }
+
+
         [HttpGet]
         public IActionResult Index()
         {
             var tours = _repository.GetTours()
-                .Select(t => new TourDto(t.Id, t.Destination))
+                .Select(t => new TourDto(t.Id, t.Destination, t.Flights.FirstOrDefault()?.Id ?? 0))
                 .ToList();
 
             return View(tours);

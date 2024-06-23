@@ -26,7 +26,7 @@ namespace ProjektSzkolenieTechniczne.Service.Command.Tour.Add
         [Required(ErrorMessage = "The FlightTime field is required.")]
         public int FlightTime { get; set; }
 
-       
+        // Parameterless constructor
         public AddTourCommand() { }
 
         public AddTourCommand(string destination, bool isActive, int year, int tourTime, DateTime date, int flightTime, int numberOfTickets)

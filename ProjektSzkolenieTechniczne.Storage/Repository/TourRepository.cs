@@ -44,9 +44,18 @@ namespace SzkolenieTechniczneStorage.Repository
 
         public void RemoveTour(long id)
         {
-            var tour = _context.Tours.Find(id);
+            var tour = _context.Tours
+                .Include(t => t.Flights)
+                .ThenInclude(f => f.Tickets)
+                .FirstOrDefault(t => t.Id == id);
+
             if (tour != null)
             {
+                foreach (var flight in tour.Flights)
+                {
+                    _context.Tickets.RemoveRange(flight.Tickets);
+                }
+                _context.Flights.RemoveRange(tour.Flights);
                 _context.Tours.Remove(tour);
                 _context.SaveChanges();
             }

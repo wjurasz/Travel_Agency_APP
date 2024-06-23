@@ -2,6 +2,7 @@
 using ProjektSzkolenieTechniczne.Service.Command.Ticket.BuyTicket;
 using SzkolenieTechniczneStorage.Entities;
 using SzkolenieTechniczneStorage;
+using Microsoft.EntityFrameworkCore;
 
 namespace Travel_Agency.Controllers
 {
@@ -15,22 +16,25 @@ namespace Travel_Agency.Controllers
         }
 
         [HttpGet]
-        public IActionResult BuyTicket(long tourId)
+        public IActionResult BuyTicket(long tourId, long flightId)
         {
             var tour = _repository.Tours.Find(tourId);
-            if (tour == null)
+            var flight = _repository.Flights.Find(flightId);
+            if (tour == null || flight == null)
             {
                 return NotFound();
             }
 
             var command = new BuyTicketCommand
             {
-                TourId = tourId
+                TourId = tourId,
+                FlightId = flightId
             };
 
             return View(command);
         }
 
+        [HttpPost]
         [HttpPost]
         public IActionResult BuyTicket(BuyTicketCommand command)
         {
@@ -59,7 +63,6 @@ namespace Travel_Agency.Controllers
                 return RedirectToAction("Index", "Tour");
             }
 
-            // Display validation errors if any
             return View(command);
         }
     }

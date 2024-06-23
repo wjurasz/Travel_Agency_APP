@@ -22,19 +22,19 @@ namespace SzkolenieTechniczneStorage
                 .HasOne(f => f.Tour)
                 .WithMany(t => t.Flights)
                 .HasForeignKey(f => f.TourId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.Flight)
                 .WithMany(f => f.Tickets)
                 .HasForeignKey(t => t.FlightId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.Tour)
                 .WithMany()
                 .HasForeignKey(t => t.TourId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

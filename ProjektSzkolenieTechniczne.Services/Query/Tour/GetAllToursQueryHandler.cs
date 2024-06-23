@@ -17,7 +17,7 @@ namespace SzkolenieTechniczneService.Query.Tour
         {
             var tours = _repository.GetTours();
 
-            return tours.Select(item => new TourDto(item.Id, item.Destination)).ToList();
+            return tours.Select(item => new TourDto(item.Id, item.Destination, item.Id)).ToList();
         }
     }
 }

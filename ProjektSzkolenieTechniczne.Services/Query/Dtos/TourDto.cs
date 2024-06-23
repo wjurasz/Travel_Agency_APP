@@ -6,10 +6,13 @@
 
         public string Destination { get; set; }
 
-        public TourDto(long id, string destination)
+        public long FlightId { get; set; }
+
+        public TourDto(long id, string destination, long flightId)
         {
             Id = id;
             Destination = destination;
+            FlightId = flightId;
         }
     }
 }
